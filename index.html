@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Elvis Raganya — Web Developer & IT Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=Bricolage+Grotesque:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04050f;
+  --bg2:#080a1a;
+  --bg3:#0d1028;
+  --surface:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --a1:#FF6B35;
+  --a2:#FF9F1C;
+  --a3:#C77DFF;
+  --a4:#48CAE4;
+  --text:#F2F0FF;
+  --muted:#8B89A8;
+  --faint:#2a2a44;
+  --font-h:'Clash Display',sans-serif;
+  --font-b:'Bricolage Grotesque',sans-serif;
+  --r:14px;
+  --r2:22px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.7;overflow-x:hidden}
+
+html,body{
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+img,iframe,video{
+  max-width:100%;
+}
+
+
+/* BACKGROUND MESH */
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-mesh::before{content:'';position:absolute;width:900px;height:900px;top:-300px;right:-300px;background:radial-gradient(circle,rgba(255,107,53,0.12) 0%,transparent 65%);animation:driftA 18s ease-in-out infinite alternate}
+.bg-mesh::after{content:'';position:absolute;width:700px;height:700px;bottom:-200px;left:-200px;background:radial-gradient(circle,rgba(199,125,255,0.1) 0%,transparent 65%);animation:driftB 22s ease-in-out infinite alternate}
+.bg-blob{position:absolute;width:500px;height:500px;top:40%;left:35%;background:radial-gradient(circle,rgba(72,202,228,0.07) 0%,transparent 65%);animation:driftC 15s ease-in-out infinite alternate}
+@keyframes driftA{from{transform:translate(0,0) scale(1)}to{transform:translate(-80px,60px) scale(1.15)}}
+@keyframes driftB{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,-80px) scale(1.1)}}
+@keyframes driftC{from{transform:translate(0,0)}to{transform:translate(-40px,50px)}}
+
+/* GRID OVERLAY */
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;backdrop-filter:blur(24px);background:rgba(4,5,15,0.75);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-h);font-size:1.15rem;font-weight:700;text-decoration:none;color:var(--text);letter-spacing:-0.02em}
+.nav-logo em{font-style:normal;background:linear-gradient(90deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:0.875rem;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;padding:.5rem 1.25rem;border-radius:999px;font-size:.875rem;font-weight:600;text-decoration:none;font-family:var(--font-h);transition:opacity .2s,transform .2s;box-shadow:0 0 24px rgba(255,107,53,.3)}
+.nav-cta:hover{opacity:.88;transform:translateY(-2px)}
+
+/* WRAPPER */
+.wrapper{max-width:1100px;margin:0 auto;padding:0 5%;position:relative;z-index:2}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:5rem}
+.hero-inner{display:grid;grid-template-columns:1fr 340px;gap:3rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .9rem;border-radius:999px;background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.2);color:var(--a1);font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--a1);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.hero h1{font-family:var(--font-h);font-size:clamp(2.8rem,5.5vw,5rem);font-weight:700;line-height:1.04;letter-spacing:-.03em;margin-bottom:1.5rem}
+.hero h1 .g{background:linear-gradient(135deg,var(--a1) 0%,var(--a2) 50%,var(--a3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--muted);font-size:1.05rem;max-width:500px;margin-bottom:2.5rem;line-height:1.8}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn-p{background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;padding:.75rem 1.75rem;border-radius:999px;font-family:var(--font-h);font-weight:600;font-size:.95rem;text-decoration:none;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 4px 28px rgba(255,107,53,.35)}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 8px 36px rgba(255,107,53,.45)}
+.btn-s{border:1px solid var(--border2);color:var(--text);padding:.75rem 1.75rem;border-radius:999px;font-family:var(--font-h);font-weight:600;font-size:.95rem;text-decoration:none;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem;background:transparent}
+.btn-s:hover{border-color:var(--a3);color:var(--a3)}
+
+/* RESUME DOWNLOAD BUTTON */
+.btn-resume{background:linear-gradient(135deg,var(--a3),var(--a4));color:#fff;padding:.7rem 1.5rem;border-radius:999px;font-family:var(--font-h);font-weight:600;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 4px 22px rgba(199,125,255,.3);transition:all .25s;cursor:pointer;border:none}
+.btn-resume:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(199,125,255,.4);opacity:.92}
+
+/* HERO CARD */
+.hero-card{background:linear-gradient(145deg,rgba(255,107,53,.08),rgba(199,125,255,.06));border:1px solid var(--border);border-radius:var(--r2);padding:2rem;position:relative;overflow:hidden;flex-shrink:0}
+.hero-card::before{content:'';position:absolute;inset:-1px;border-radius:var(--r2);background:linear-gradient(135deg,rgba(255,107,53,.25),transparent 50%,rgba(199,125,255,.15));z-index:0;opacity:.5}
+.hero-card>*{position:relative;z-index:1}
+.avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a2));display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:1.25rem}
+.hero-card-name{font-family:var(--font-h);font-size:1.1rem;font-weight:700;margin-bottom:.25rem}
+.hero-card-title{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem}
+.hero-card-stats{display:flex;flex-direction:column;gap:.75rem}
+.stat-row{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.04);border-radius:var(--r);padding:.6rem .9rem;border:1px solid var(--border)}
+.stat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.stat-val{font-family:var(--font-h);font-weight:600;font-size:.9rem}
+.stat-lbl{color:var(--muted);font-size:.75rem;margin-left:auto}
+
+/* SECTION */
+section{padding:6rem 0;position:relative;z-index:2}
+.s-tag{font-family:var(--font-h);font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--a1);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.s-tag::before{content:'';display:block;width:24px;height:2px;background:linear-gradient(90deg,var(--a1),var(--a2));border-radius:2px}
+.s-title{font-family:var(--font-h);font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem}
+.s-desc{color:var(--muted);max-width:520px;font-size:.98rem}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start;margin-top:3rem}
+.about-text p{color:var(--muted);margin-bottom:1.1rem;font-size:.96rem;line-height:1.8}
+.about-text p strong{color:var(--text);font-weight:500}
+
+.skills-wrap{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.sk{background:rgba(255,255,255,.04);border:1px solid var(--border);padding:.35rem .85rem;border-radius:8px;font-size:.8rem;color:var(--muted);transition:all .2s}
+.sk:hover{border-color:var(--a1);color:var(--a1)}
+
+/* RESUME CARD */
+.resume-card{background:linear-gradient(135deg,rgba(199,125,255,.08),rgba(72,202,228,.06));border:1px solid rgba(199,125,255,.2);border-radius:var(--r2);padding:1.75rem;display:flex;align-items:center;gap:1.25rem;margin-top:1.5rem;position:relative;overflow:hidden}
+.resume-card::after{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(199,125,255,.15) 0%,transparent 70%)}
+.resume-icon-wrap{width:56px;height:56px;border-radius:var(--r);background:linear-gradient(135deg,rgba(199,125,255,.2),rgba(72,202,228,.15));border:1px solid rgba(199,125,255,.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.resume-meta{flex:1}
+.resume-meta strong{font-family:var(--font-h);font-size:.95rem;display:block;margin-bottom:.2rem}
+.resume-meta span{color:var(--muted);font-size:.78rem}
+
+/* PROJECTS */
+.proj-filters{display:flex;gap:.5rem;margin:2rem 0;flex-wrap:wrap}
+.f-btn{padding:.4rem 1rem;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font-b)}
+.f-btn:hover,.f-btn.active{border-color:var(--a1);color:var(--a1);background:rgba(255,107,53,.08)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
+.proj-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;transition:border-color .25s,transform .25s;display:flex;flex-direction:column;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.proj-card:hover{border-color:rgba(255,107,53,.3);transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.proj-thumb{height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.proj-thumb-bg{position:absolute;inset:0;background-size:cover;filter:blur(0px)}
+.proj-thumb-text{font-family:var(--font-h);font-size:4.5rem;font-weight:700;color:rgba(255,255,255,.06);position:absolute;letter-spacing:-.05em}
+.proj-thumb-icon{font-size:2.4rem;position:relative;z-index:1;filter:drop-shadow(0 4px 16px rgba(0,0,0,.5))}
+.proj-body{padding:1.4rem;flex:1;display:flex;flex-direction:column}
+.proj-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.75rem}
+.ptag{padding:.18rem .55rem;border-radius:5px;font-size:.68rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.t-web{background:rgba(255,107,53,.12);color:var(--a1)}
+.t-wp{background:rgba(72,202,228,.12);color:var(--a4)}
+.t-app{background:rgba(199,125,255,.12);color:var(--a3)}
+.t-js{background:rgba(255,159,28,.12);color:var(--a2)}
+.t-seo{background:rgba(100,200,100,.12);color:#7ED56F}
+.proj-title{font-family:var(--font-h);font-size:1.05rem;font-weight:700;margin-bottom:.45rem}
+.proj-desc{color:var(--muted);font-size:.865rem;line-height:1.7;flex:1}
+.proj-foot{display:flex;gap:.75rem;margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.pl{font-size:.78rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:.35rem;color:var(--muted);transition:color .2s}
+.pl:hover{color:var(--a1)}
+.pl svg{width:12px;height:12px}
+
+/* TIMELINE */
+.timeline{margin-top:3rem;position:relative}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--a1),var(--a3),transparent)}
+.tl-item{padding-left:2.25rem;padding-bottom:3rem;position:relative}
+.tl-item::before{content:'';position:absolute;left:-5px;top:5px;width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 0 12px rgba(255,107,53,.5)}
+.tl-date{font-size:.77rem;color:var(--muted);letter-spacing:.04em;margin-bottom:.35rem}
+.tl-role{font-family:var(--font-h);font-size:1.1rem;font-weight:700;margin-bottom:.2rem}
+.tl-co{font-size:.88rem;font-weight:500;margin-bottom:.85rem;background:linear-gradient(90deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tl-list{list-style:none}
+.tl-list li{color:var(--muted);font-size:.875rem;padding:.2rem 0 .2rem 1.2rem;position:relative}
+.tl-list li::before{content:'→';position:absolute;left:0;color:var(--a1);font-size:.7rem;top:.35rem}
+
+/* SKILLS CLUSTERS */
+.clusters{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.1rem;margin-top:2.5rem}
+.cluster{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:1.4rem;transition:border-color .2s}
+.cluster:hover{border-color:rgba(255,107,53,.2)}
+.c-icon{font-size:1.4rem;margin-bottom:.65rem}
+.c-title{font-family:var(--font-h);font-weight:700;font-size:.95rem;margin-bottom:.85rem}
+.c-items{display:flex;flex-wrap:wrap;gap:.4rem}
+.c-item{background:rgba(255,255,255,.04);border:1px solid var(--border);padding:.25rem .65rem;border-radius:6px;font-size:.77rem;color:var(--muted)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;margin-top:3rem}
+.c-info{display:flex;flex-direction:column;gap:1.25rem}
+.c-item-r{display:flex;align-items:flex-start;gap:.9rem}
+.c-icon-wrap{width:42px;height:42px;background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.15);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.c-lbl{font-size:.72rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:.15rem}
+.c-val{font-size:.92rem}
+.socials{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.75rem}
+.soc{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);border:1px solid var(--border);padding:.45rem .9rem;border-radius:999px;text-decoration:none;color:var(--muted);font-size:.77rem;transition:all .2s}
+.soc:hover{border-color:var(--a1);color:var(--a1)}
+.c-form{display:flex;flex-direction:column;gap:.9rem}
+.c-form input,.c-form textarea{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text);padding:.75rem 1rem;border-radius:var(--r);font-family:var(--font-b);font-size:.9rem;transition:border-color .2s;outline:none;width:100%}
+.c-form input:focus,.c-form textarea:focus{border-color:var(--a1)}
+.c-form textarea{resize:vertical;min-height:120px}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem 5%;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;flex-wrap:wrap;gap:1rem}
+footer p{color:var(--muted);font-size:.78rem}
+.f-logo{font-family:var(--font-h);font-weight:700;font-size:.95rem}
+.f-logo em{font-style:normal;background:linear-gradient(90deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* TYPING */
+.type-wrap{display:inline-block;border-right:3px solid var(--a1);padding-right:3px;animation:blink-caret .75s step-end infinite;white-space:nowrap;overflow:hidden;vertical-align:bottom}
+@keyframes blink-caret{from,to{border-color:transparent}50%{border-color:var(--a1)}}
+
+/* RESPONSIVE */
+
+/* MOBILE IMPROVEMENTS */
+@media(max-width:900px){
+  nav{
+    padding:.9rem 1rem;
+  }
+
+  .wrapper{
+    padding:0 1rem;
+  }
+
+  .hero{
+    min-height:auto;
+    padding:7rem 0 4rem;
+  }
+
+  .hero-inner,
+  .about-grid,
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:2rem;
+  }
+
+  .hero-card{
+    display:block;
+    width:100%;
+  }
+
+  .hero h1{
+    font-size:2.4rem;
+    line-height:1.15;
+  }
+
+  .hero-sub{
+    font-size:.95rem;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .nav-cta{
+    padding:.5rem 1rem;
+    font-size:.8rem;
+  }
+
+  .proj-grid{
+    grid-template-columns:1fr;
+  }
+
+  .clusters{
+    grid-template-columns:1fr;
+  }
+
+  .proj-card,
+  .cluster,
+  .hero-card,
+  .resume-card{
+    width:100%;
+  }
+
+  .proj-thumb{
+    height:150px;
+  }
+
+  .proj-thumb-text{
+    font-size:3rem;
+  }
+
+  .hero-btns{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .btn-p,
+  .btn-s,
+  .btn-resume{
+    width:100%;
+    justify-content:center;
+    text-align:center;
+  }
+
+  .socials{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .soc{
+    justify-content:center;
+    padding:.8rem 1rem;
+    font-size:.9rem;
+  }
+
+  footer{
+    text-align:center;
+    justify-content:center;
+  }
+
+  section{
+    padding:4rem 0;
+  }
+}
+
+@media(max-width:480px){
+  body{
+    font-size:15px;
+  }
+
+  .hero h1{
+    font-size:2rem;
+  }
+
+  .s-title{
+    font-size:1.8rem;
+  }
+
+  .hero-card{
+    padding:1.3rem;
+  }
+
+  .resume-card{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .tl-item{
+    padding-left:1.7rem;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="bg-mesh"><div class="bg-blob"></div></div>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Elvis<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrapper" style="width:100%">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">Available for work</div>
+        <h1>
+          <span class="type-wrap" id="typed-line"></span><br>
+          <span class="g">& IT Specialist</span>
+        </h1>
+        <p class="hero-sub">Building responsive web applications and WordPress sites with clean code and great UX. Based in Limpopo, South Africa.</p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-p">View My Work →</a>
+          <a href="#contact" class="btn-s">Get in Touch</a>
+          <a href="#" class="btn-resume" id="resume-dl" download="Elvis_Raganya_Resume.pdf">⬇ Download CV</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="avatar">ER</div>
+        <div class="hero-card-name">Elvis Raganya</div>
+        <div class="hero-card-title">Web Developer · Limpopo, SA</div>
+        <div class="hero-card-stats">
+          <div class="stat-row">
+            <span class="stat-dot" style="background:var(--a1)"></span>
+            <span class="stat-val">2+</span>
+            <span class="stat-lbl">Years Dev Experience</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-dot" style="background:var(--a3)"></span>
+            <span class="stat-val" id="pc">3</span>
+            <span class="stat-lbl">Projects</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-dot" style="background:var(--a4)"></span>
+            <span class="stat-val">3</span>
+            <span class="stat-lbl">Industries Served</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-dot" style="background:var(--a2)"></span>
+            <span class="stat-val">4</span>
+            <span class="stat-lbl">Languages Spoken</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrapper">
+    <div class="s-tag">Who I Am</div>
+    <h2 class="s-title">About Elvis</h2>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>I'm <strong>Elvis Raganya</strong>, a web developer and IT professional from Tzaneen, Limpopo. I hold a High Certificate in Information Technology &amp; Computer Sciences (NCV L4) from Mopani South East TVET College.</p>
+        <p>At <strong>Hungry Developments</strong> I spent two years building responsive web applications and WordPress sites for clients across diverse industries, with a focus on performance, clean UI, and thorough documentation.</p>
+        <p>Before dev work, I trained hundreds of students at <strong>Keletso ICT</strong> — teaching everything from mouse basics to Excel and PowerPoint — and handled office administration at <strong>Olorato Youth Development</strong>.</p>
+        <p>I'm a <strong>fast learner</strong>, thrive under pressure, and am eager to grow deeper into full-stack development and mobile app work.</p>
+
+        <!-- RESUME CARD -->
+        <div class="resume-card">
+          <div class="resume-icon-wrap">📄</div>
+          <div class="resume-meta">
+            <strong>Elvis_Raganya_Resume.pdf</strong>
+            <span>Full CV — 2 pages · PDF</span>
+          </div>
+          <a href="#" class="btn-resume" id="resume-dl2" download="Elvis_Raganya_Resume.pdf">⬇ Download</a>
+        </div>
+      </div>
+      <div>
+        <div class="s-tag" style="margin-bottom:.75rem">Core Skills</div>
+        <div class="skills-wrap">
+          <span class="sk">HTML / CSS</span><span class="sk">JavaScript</span>
+          <span class="sk">WordPress</span><span class="sk">SEO</span>
+          <span class="sk">Microsoft Office</span><span class="sk">Database Mgmt</span>
+          <span class="sk">Computer Literacy</span><span class="sk">Mobile Apps</span>
+          <span class="sk">Admin Support</span><span class="sk">Team Collaboration</span>
+        </div>
+        <div class="s-tag" style="margin-bottom:.75rem;margin-top:1.5rem">Languages</div>
+        <div class="skills-wrap">
+          <span class="sk">English</span><span class="sk">Sepedi (Native)</span>
+          <span class="sk">isiTsonga</span><span class="sk">isiZulu</span>
+        </div>
+        <div class="s-tag" style="margin-bottom:.75rem;margin-top:1.5rem">Education</div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.2rem">
+          <p style="font-family:var(--font-h);font-size:.95rem;font-weight:700;margin-bottom:.2rem">IT & Computer Sciences NCV L4</p>
+          <p style="color:var(--muted);font-size:.8rem">Mopani South East TVET · 2020–2023</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrapper">
+    <div class="s-tag">Portfolio</div>
+    <h2 class="s-title">Projects &amp; Work</h2>
+    <p class="s-desc">A selection of web applications, WordPress sites, and tools I've built.</p>
+    <div class="proj-filters">
+      <button class="f-btn active" data-filter="all">All</button>
+      <button class="f-btn" data-filter="web">Web Apps</button>
+      <button class="f-btn" data-filter="wp">WordPress</button>
+      <button class="f-btn" data-filter="app">Mobile Apps</button>
+      <button class="f-btn" data-filter="other">Other</button>
+    </div>
+    <div class="proj-grid reveal" id="projects-grid">
+      <div class="proj-card" data-category="web" style="animation-delay:.05s">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#0a0e1f,#111c3a,#1a2850)">
+          <div class="proj-thumb-text">WEB</div>
+          <span class="proj-thumb-icon">🌐</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags"><span class="ptag t-web">Web App</span><span class="ptag t-js">JavaScript</span></div>
+          <div class="proj-title">Responsive Web Application</div>
+          <p class="proj-desc">A fully responsive frontend web application built with HTML, CSS, and vanilla JavaScript. Dynamic UI components and smooth interactions.</p>
+          <div class="proj-foot">
+            <a href="#" class="pl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
+            <a href="#" class="pl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card" data-category="wp" style="animation-delay:.1s">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#0f0a20,#1a1040,#2a1a5a)">
+          <div class="proj-thumb-text">WP</div>
+          <span class="proj-thumb-icon">🔷</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags"><span class="ptag t-wp">WordPress</span><span class="ptag t-seo">SEO</span></div>
+          <div class="proj-title">Client Business Website</div>
+          <p class="proj-desc">Custom WordPress website for a local business client. Optimised page speed, SEO setup, and tailored plugin configuration to meet client needs.</p>
+          <div class="proj-foot">
+            <a href="#" class="pl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
+            <a href="#" class="pl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Site</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card" data-category="web" style="animation-delay:.15s">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#0a1a10,#0d2a18,#0f3820)">
+          <div class="proj-thumb-text">UX</div>
+          <span class="proj-thumb-icon">⚙️</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags"><span class="ptag t-web">Web App</span><span class="ptag t-js">JavaScript</span></div>
+          <div class="proj-title">UX Feature Enhancement</div>
+          <p class="proj-desc">Implemented new interactive features for an existing web platform, improving usability and user flow. Maintained full documentation throughout.</p>
+          <div class="proj-foot">
+            <a href="#" class="pl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrapper">
+    <div class="s-tag">Career</div>
+    <h2 class="s-title">Experience</h2>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-date">2023 – 2025</div>
+        <div class="tl-role">Website / Web Application Developer</div>
+        <div class="tl-co">Hungry Developments — Maruleng</div>
+        <ul class="tl-list">
+          <li>Built responsive web applications using HTML, CSS, and JavaScript</li>
+          <li>Developed custom WordPress websites tailored to each client's needs</li>
+          <li>Implemented new features to improve usability and user experience</li>
+          <li>Optimised site speed and SEO through best practices and plugins</li>
+          <li>Maintained technical documentation for development processes</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Jan 2023 – Nov 2023</div>
+        <div class="tl-role">Admin / Receptionist</div>
+        <div class="tl-co">Olorato Youth Development — Phalaborwa</div>
+        <ul class="tl-list">
+          <li>Delivered customer service for internal and external stakeholders</li>
+          <li>Typed correspondence, organised files, managed document scanning</li>
+          <li>Handled filing, data entry, and photocopying for smooth operations</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Jan 2022 – Nov 2022</div>
+        <div class="tl-role">Computer Literacy Facilitator</div>
+        <div class="tl-co">Keletso ICT — Phalaborwa</div>
+        <ul class="tl-list">
+          <li>Trained students in Microsoft Word, Excel, and PowerPoint</li>
+          <li>Guided learners on email systems and online communication tools</li>
+          <li>Assisted with troubleshooting and personalised learning strategies</li>
+          <li>Covered OS basics: keyboard, Windows programs, internet navigation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrapper">
+    <div class="s-tag">Expertise</div>
+    <h2 class="s-title">Skills &amp; Tools</h2>
+    <div class="clusters reveal">
+      <div class="cluster">
+        <div class="c-icon">💻</div>
+        <div class="c-title">Frontend Development</div>
+        <div class="c-items">
+          <span class="c-item">HTML5</span><span class="c-item">CSS3</span>
+          <span class="c-item">JavaScript</span><span class="c-item">Responsive Design</span>
+          <span class="c-item">WordPress</span>
+        </div>
+      </div>
+      <div class="cluster">
+        <div class="c-icon">🔧</div>
+        <div class="c-title">Tools &amp; Systems</div>
+        <div class="c-items">
+          <span class="c-item">Git / GitHub</span><span class="c-item">SEO Plugins</span>
+          <span class="c-item">Page Speed Opt.</span><span class="c-item">Database Mgmt</span>
+          <span class="c-item">Dep. Management</span>
+        </div>
+      </div>
+      <div class="cluster">
+        <div class="c-icon">📊</div>
+        <div class="c-title">Office &amp; Productivity</div>
+        <div class="c-items">
+          <span class="c-item">Microsoft Word</span><span class="c-item">Excel</span>
+          <span class="c-item">PowerPoint</span><span class="c-item">Access</span>
+          <span class="c-item">Data Entry</span>
+        </div>
+      </div>
+      <div class="cluster">
+        <div class="c-icon">🤝</div>
+        <div class="c-title">Soft Skills</div>
+        <div class="c-items">
+          <span class="c-item">Team Collaboration</span><span class="c-item">Time Management</span>
+          <span class="c-item">Adaptability</span><span class="c-item">Communication</span>
+          <span class="c-item">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrapper">
+    <div class="s-tag">Let's Connect</div>
+    <h2 class="s-title">Get in Touch</h2>
+    <p class="s-desc">Open to new opportunities, freelance projects, and collaborations.</p>
+    <div class="contact-grid reveal">
+      <div>
+        <div class="c-info">
+          <div class="c-item-r">
+            <div class="c-icon-wrap">📍</div>
+            <div><div class="c-lbl">Location</div><div class="c-val">Tzaneen, Polokwane, Limpopo 0891</div></div>
+          </div>
+          <div class="c-item-r">
+            <div class="c-icon-wrap">📞</div>
+            <div><div class="c-lbl">Phone</div><div class="c-val">071-346-5684</div></div>
+          </div>
+          <div class="c-item-r">
+            <div class="c-icon-wrap">✉️</div>
+            <div><div class="c-lbl">Email</div><div class="c-val">elvisrganya00@gmail.com</div></div>
+          </div>
+        </div>
+        
+        <div class="socials">
+          <a href="tel:+27713465684" class="soc">
+            📞 Call Me
+          </a>
+
+          <a href="mailto:elvisrganya00@gmail.com?subject=Website%20Inquiry&body=Hello%20Elvis,%20I%20would%20like%20to%20work%20with%20you." class="soc">
+            ✉️ Email Me
+          </a>
+
+          <a href="https://wa.me/27713465684?text=Hello%20Elvis,%20I%20am%20interested%20in%20your%20services." target="_blank" class="soc">
+            💬 WhatsApp
+          </a>
+        </div>
+
+      </div>
+      <div>
+        <form class="c-form" onsubmit="sendMsg(event)">
+          <input type="text" placeholder="Your Name" required/>
+          <input type="email" placeholder="Email Address" required/>
+          <input type="text" placeholder="Subject"/>
+          <textarea placeholder="Your message..."></textarea>
+          <button type="submit" class="btn-p" style="border:none;cursor:pointer;justify-content:center">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Elvis<em>.</em></div>
+  <p>© 2025 Elvis Raganya · Tzaneen, Limpopo, South Africa</p>
+  <p style="font-size:.73rem;color:var(--faint)">Built with HTML, CSS &amp; JS</p>
+</footer>
+
+<script>
+/* ── Embed resume PDF as data URL ── */
+const RESUME_B64 = 'RESUME_B64_PLACEHOLDER';
+const resumeURL = 'data:application/pdf;base64,' + RESUME_B64;
+document.getElementById('resume-dl').href = resumeURL;
+document.getElementById('resume-dl2').href = resumeURL;
+
+/* ── Typing animation ── */
+const words = ['Web Developer','Frontend Developer','WordPress Expert','UI Builder'];
+let wi=0,ci=0,del=false;
+const el = document.getElementById('typed-line');
+function type(){
+  const w = words[wi];
+  if(!del){
+    el.textContent = w.slice(0,++ci);
+    if(ci===w.length){del=true;setTimeout(type,1800);return}
+  } else {
+    el.textContent = w.slice(0,--ci);
+    if(ci===0){del=false;wi=(wi+1)%words.length;setTimeout(type,400);return}
+  }
+  setTimeout(type, del?60:100);
+}
+type();
+
+/* ── Scroll reveal ── */
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── Project filter ── */
+document.querySelectorAll('.f-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('#projects-grid .proj-card').forEach(c=>{
+      c.style.display=(f==='all'||c.dataset.category===f)?'flex':'none';
+    });
+  });
+});
+
+/* ── Contact form ── */
+function sendMsg(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('button');
+  btn.textContent='✓ Sent!';
+  btn.style.background='linear-gradient(135deg,#48CAE4,#00B4D8)';
+  setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';e.target.reset();},3000);
+}
+
+/* ── Parallax orbs ── */
+document.addEventListener('mousemove',e=>{
+  const x=(e.clientX/window.innerWidth-.5)*20;
+  const y=(e.clientY/window.innerHeight-.5)*20;
+  document.querySelector('.bg-mesh::before');
+  document.querySelector('.bg-blob').style.transform=`translate(${x}px,${y}px)`;
+});
+</script>
+</body>
+</html>
